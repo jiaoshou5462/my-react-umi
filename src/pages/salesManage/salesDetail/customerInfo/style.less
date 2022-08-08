@@ -1,0 +1,101 @@
+@import (reference) '~@/css/common.less';
+
+.customerInfoPage {
+  .content-box-shadow;
+  background-color: #fff;
+
+  &:last-child {
+    margin-top: 30px;
+  }
+}
+
+.title {
+  line-height: 60px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0 24px;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.form {
+  padding: 24px !important;
+
+  .form_all {
+    overflow: hidden;
+
+    .form_item {
+      float: left;
+      width: 33%;
+    }
+  }
+}
+
+.tableData {
+  padding: 0 24px;
+  padding-bottom: 30px;
+
+  .tableData_title {
+    height: 60px;
+    line-height: 60px;
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    position: relative;
+
+    .tableData_btn1 {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+
+      Button {
+        float: left;
+        margin-left: 20px;
+      }
+    }
+  }
+
+  .box {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+
+  .activeBox {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #1890ff;
+    border: 1px solid #1890ff;
+    cursor: pointer;
+    color: #fff;
+  }
+
+}
+
+.interspace {
+  background-color: rgba(242, 242, 242, 1);
+  height: 10px;
+}
+
+.tab_btn_box {
+  display: flex;
+  align-items: center;
+
+  a {
+    padding: 5px 0;
+    display: inline-block;
+  }
+
+  span {
+    height: 15px;
+    flex: 0 0 0px;
+    display: inline-block;
+    border-left: 1px solid #e9e9e9;
+    margin: 0 10px;
+  }
+}

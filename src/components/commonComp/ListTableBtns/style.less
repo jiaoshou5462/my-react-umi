@@ -1,0 +1,31 @@
+@import (reference) '~@/css/common.less';
+.btn_box{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.btn_item{
+  margin-right: 16px;
+  color: @primaryColor;
+  cursor: pointer;
+  &:last-child{
+    margin-right: 0;
+  }
+}
+.drop_btn{
+  color: @primaryColor;
+  cursor: pointer;
+  font-size: 16px;
+}
+.drop_box{
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  box-shadow: 0px 0px 10px 0px rgba(212, 212, 212, 0.5);
+  padding: 10px;
+  .drop_item{
+    width: auto;
+    padding: 5px 0;
+  }
+}

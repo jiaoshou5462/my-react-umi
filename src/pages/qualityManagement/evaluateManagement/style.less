@@ -1,0 +1,126 @@
+@import (reference) '~@/css/common.less';
+
+.evaluateManagement_top {
+  .content-box-shadow;
+  background-color: #fff;
+  margin-bottom: 16px;
+  ul {
+    display: flex;
+    padding-top: 32px;
+    padding-bottom: 28px;
+    margin: 0 !important;
+    li {
+      width: 20%;
+      display: flex;
+      flex-direction: row;
+      padding-left: 32px;
+      .img_box {
+        width: 48px;
+        height: 48px;
+        margin-right: 12px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .evaluateManagement_item {
+        display: flex;
+        flex-direction: column;
+        font-size: 14px;
+        color: #999999;
+        span:first-child{
+         height: 14px;
+         line-height: 14px;
+        }
+        .item_text {
+          display: flex;
+          align-items: baseline;
+          margin-top: -4px;
+          .item_title {
+            font-size: 30px;
+            color: #666666;
+            font-weight: 500;
+            margin-right: 6px;
+          }
+          .triangle_box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transform: translateY(-2px);
+            .triangle_top {
+              border-style: solid;
+              border-width: 0px 4.5px 4.5px 4.5px;
+              border-color: transparent transparent #ED1F45 transparent;
+              width: 0px;
+              height: 0px;
+            }
+            .triangle_bottom {
+              border-style: solid;
+              border-width: 4.5px 4.5px 0px 4.5px;
+              border-color: #32D1AD transparent transparent transparent;
+              width: 0px;
+              height: 0px;
+            }
+            .triangle_text {
+              color: #666666;
+              font-size: 14px;
+              margin-left: 4px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.account {
+  .content-box-shadow;
+  background-color: #fff;
+  margin-bottom: 16px;
+}
+.form {
+  padding: 24px 24px 0 24px !important;
+}
+.tableData_title {
+  height: 60px;
+  line-height: 60px;
+  font-size: 16px;
+  font-weight: 600;
+  // border-bottom: 1px solid #eee;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  .block-title;
+}
+
+
+.tableData {
+  padding: 24px;
+  padding-top: 0px;
+  :global {
+    .ant-tag {
+      border: none;
+      font-size: 12px;
+      border-radius: 2px;
+    }
+  }
+}
+
+.span_blue {
+  margin-right: 16px;
+  color: #1890ff;
+  cursor: pointer;
+}
+
+.pagination{
+  margin: 30px 0 !important;
+  float: right;
+}
+
+.fw500{
+  font-weight: 500;
+}
+
+.time_box {
+  display: flex;
+  flex-wrap: wrap;
+}

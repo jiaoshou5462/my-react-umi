@@ -1,0 +1,110 @@
+@import (reference) '~@/css/common.less';
+
+.content {
+  .content-box-shadow;
+  background-color: #fff;
+
+  &:last-child {
+    margin-top: 30px;
+  }
+  :global{
+    .ant-picker{
+      width: 100%;
+    }
+  }
+  .name{
+    color:#1890FF;
+    cursor: pointer;
+  }
+  .strategyTypeStr{
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 2px;
+   
+  }
+  .taskType_1{
+    color: #2FB6E4;
+    background: #DDF6FF;
+  }
+  .taskType_2{
+    color: #FF4A1A ;
+    background: #FDF0ED;
+  }
+  .taskType_3{
+    color: #32D1AD ;
+    background: #E0FFF7;
+  }
+  .status_content{
+    position: relative;
+  }
+  .statusStr_0::before{
+    content: "";
+    position: absolute;
+    left: 50%;
+    margin-left: -36px;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ED1F45;
+  }
+  .statusStr_1::before{
+    content: "";
+    position: absolute;
+    left: 50%;
+    margin-left: -36px;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #28CB6B;
+  }
+  .statusStr_2::before{
+    content: "";
+    position: absolute;
+    left: 50%;
+    margin-left: -36px;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #CCCCCC;
+  }
+}
+
+.form {
+  padding: 24px 24px 0 24px !important;
+}
+
+.tableData_title {
+  height: 60px;
+  line-height: 60px;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  .block-title;
+}
+
+.tableData {
+  padding: 24px;
+  overflow: auto;
+}
+.pagination{
+  margin-top: 30px !important;
+  float: right;
+}
+
+
+.filter_box{
+  .content-box-shadow;
+  background-color: #fff;
+}
+.list_box{
+  .content-box-shadow;
+}
+.form {
+  padding: 24px 24px 0 24px !important;
+}

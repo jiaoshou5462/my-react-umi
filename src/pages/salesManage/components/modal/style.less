@@ -1,0 +1,153 @@
+// 迁移
+.info {
+  padding-bottom: 0;
+  overflow: hidden;
+  border-bottom: 1px solid #E8E8E8;
+  .info_title {
+    color: #444;
+    font-weight: 600;
+  }
+  .item_box {
+    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    .key_val{
+      width: 33.33%;
+      height: 40px;
+      line-height: 40px;
+      span {
+        color: #666;
+      }
+    }
+  }
+}
+.infos {
+  padding-top: 20px;
+  padding-bottom: 0;
+  overflow: hidden;
+  border-bottom: 1px solid #E8E8E8;
+  .info_title {
+    color: #444;
+    font-weight: 600;
+    :global {
+      .anticon {
+        margin-left: 10px;
+      }
+    }
+  }
+  .item_box {
+    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    .key_val{
+      width: 33.33%;
+      height: 40px;
+      line-height: 40px;
+      :global {
+        .ant-checkbox-wrapper{
+          margin-right: 10px;
+        }
+      }
+      span {
+        color: #666;
+      }
+    }
+  }
+}
+.infoss {
+  padding-top: 20px;
+  padding-bottom: 0;
+  overflow: hidden;
+  .info_title {
+    color: #444;
+    font-weight: 600;
+  }
+  .item_box {
+    margin-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    .key_val{
+      width: 33.33%;
+      height: 40px;
+      line-height: 40px;
+      span {
+        color: #666;
+      }
+    }
+  }
+}
+// 底部按钮
+.modal_content_part{
+  :global{
+    .ant-modal-footer{
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+// 编辑
+.edit_info {
+  border-bottom: 1px solid #E8E8E8;
+}
+.edit_infos {
+  padding-top: 20px;
+  padding-bottom: 0;
+  overflow: hidden;
+  border-bottom: 1px solid #E8E8E8;
+  .info_title {
+    color: #444;
+    font-weight: 600;
+    :global {
+      .anticon {
+        margin-left: 10px;
+      }
+    }
+  }
+  .item_box {
+    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    .key_val{
+      width: 33.33%;
+      height: 40px;
+      line-height: 40px;
+      :global {
+        .ant-checkbox-wrapper{
+          margin-right: 10px;
+        }
+      }
+      span {
+        color: #666;
+      }
+    }
+  }
+}
+.edit_infos:last-child{
+  border-bottom: none;
+  padding-bottom: 80px;
+}
+
+// 导入销售账户
+.import_sale {
+  width: 60%;
+  margin: 00 auto;
+  .upload_icon {
+    :global{
+      .ant-upload{
+        width: 100%;
+      }
+    }
+  }
+  .put_down{
+    height: 34px;
+    border: 1px solid #d7d7d7;
+    font-size: 14px;
+    text-align: center;
+    line-height: 34px;
+    .down_icon{
+      color: #1890ff;
+      margin-right: 8px;
+    }
+  }
+}

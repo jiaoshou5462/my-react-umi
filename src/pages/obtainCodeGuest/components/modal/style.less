@@ -1,0 +1,82 @@
+@import (reference) '~@/css/common.less';
+
+.image_box{
+  height: 100%;
+  background: #fff;
+  padding-left: 20px;
+}
+.big_bg_box{
+  width: 100%;
+  border:1px solid #000;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  .bg_box {
+    width: 220px;
+    flex: 0 0 240px;
+    background: #fff !important;
+    z-index: 9;
+    position: relative;
+    .ceopper_box {
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
+      background: #fff !important;
+      z-index: 10;
+      
+    }
+  }
+  .zoom_box {
+    display: flex;
+    background-color: #fff;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    .zoom_item {
+      flex: 1;
+      .item_title {
+        margin-right: 10px !important;
+        color: #333;
+      }
+    }
+    .zoom_item1 {
+      flex: 0 0 80px;
+    }
+  }
+}
+.code_box{
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  left: 50%;
+  top:120px;
+  transform: translate(-50%,0);
+  z-index: 11;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .image_style {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.buttom_title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #3c8dbc;
+}
+
+.fontSize{
+  color :red;
+  margin-left: -5px;
+}
+
+.fontNameSize{
+  color :rgb(83, 83, 201);
+}

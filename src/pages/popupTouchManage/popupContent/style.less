@@ -1,0 +1,274 @@
+@import '~antd/lib/style/themes/default.less';
+@import (reference) '~@/css/common.less';
+
+.block__header {
+  padding: 0 30px;
+  height: 62px;
+  font-size: 18px;
+  line-height: 62px;
+  border-bottom: 1px solid #f2f2f2;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+}
+
+.saleTaskInfo_box {
+  .content-box-shadow;
+  padding: 24px 5%;
+  padding-bottom: 20px;
+
+  .showRate {
+    display: flex;
+
+    .unitSelect {
+      width: 18%;
+      margin-left: -130px;
+      // left:-26%;
+    }
+  }
+
+  .btn_box {
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // padding-top: 50px;
+    width: 100%;
+    text-align: right;
+    padding: 20px 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+
+  }
+}
+
+.right_col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .right_bg {
+    width: 300px;
+    height: 595px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    .viewModalBox3 {
+      position: absolute;
+      top: 20%;
+      width: 80%;
+      height: 296px;
+      background-color: #fff;
+      border-radius: 6px;
+
+
+      .imgBox3 {
+        width: 100%;
+        height: 116px;
+
+        img {
+          width: 100%;
+          height: 116px;
+        }
+      }
+
+      .cont {
+        text-align: center;
+
+        h4 {
+          margin-top: 20px;
+          padding: 0 20px;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          overflow: hidden;
+        }
+
+        p {
+          height: 65px;
+          padding: 0 10px;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3;
+          overflow: hidden;
+        }
+
+        .btn {
+          max-width: 132px;
+          overflow: hidden;
+        }
+      }
+
+      .cont4 {
+        text-align: center;
+
+        h4 {
+          margin-top: 20px;
+          padding: 0 20px;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          overflow: hidden;
+        }
+
+        p {
+          height: 194px;
+          padding: 0 10px;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 9;
+          overflow: hidden;
+        }
+
+        .btn {
+          max-width: 132px;
+          overflow: hidden;
+        }
+      }
+    }
+    .closeIcon1 {
+      position: absolute;
+      top: 66%;
+      font-size: 30px;
+      color: #fff;
+    }
+    .closeIcon {
+      position: absolute;
+      top: 76%;
+      font-size: 30px;
+      color: #fff;
+    }
+
+    .viewModalBox1 {
+      position: absolute;
+      top: 20%;
+      width: 80%;
+      height: 240px;
+      background-color: #fff;
+      border-radius: 6px;
+
+      .imgBox1 {
+        width: 100%;
+        height: 240px;
+
+        img {
+          width: 100%;
+          height: 240px;
+          border-radius: 6px;
+        }
+      }
+
+      .btnBox2 {
+        text-align: center;
+        margin-top: 30px;
+
+        .btn2 {
+          max-width: 132px;
+          overflow: hidden;
+        }
+      }
+    }
+
+    .right_info {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      width: 92%;
+      left: 4%;
+      top: 117px;
+      padding: 0 10px;
+      justify-content: space-between;
+      height: 115px;
+
+      .right_word {
+        width: 100%;
+
+        span {
+          color: #444;
+          font-weight: bold;
+        }
+
+        p {
+          font-size: 12px;
+          color: #999;
+          padding-top: 5px;
+        }
+      }
+
+      .right_step {
+        width: 100%;
+        display: flex;
+
+        p {
+          color: #4A4A4A;
+        }
+
+        p:first-child {
+          width: 70px;
+        }
+
+        p:last-child {
+          margin-left: 20px;
+        }
+      }
+    }
+
+    .content_box {
+      width: 92%;
+      height: 162px;
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      top: 270px;
+      left: 4%;
+      padding-top: 20px;
+      position: absolute;
+      z-index: 97;
+
+      .right_title {
+        z-index: 98;
+        width: 160px;
+        height: 33px;
+        line-height: 33px;
+        text-align: center;
+        font-weight: 500;
+        color: #fff;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        position: absolute;
+        left: 50%;
+        top: -15px;
+        transform: translate(-50%);
+      }
+
+      .right_btn {
+        z-index: 98;
+        width: 160px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: #000;
+        font-weight: 700;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        position: absolute;
+        left: 50%;
+        bottom: -20px;
+        transform: translate(-50%);
+      }
+
+      .task_name {
+        text-align: center;
+      }
+
+      .task_tips {
+        padding: 10px 20px 0;
+
+        .tip_item {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+  }
+}

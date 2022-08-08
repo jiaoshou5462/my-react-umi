@@ -1,0 +1,136 @@
+@import (reference) '~@/css/common.less';
+
+.block__cont{
+  .content-box-shadow;
+  margin-bottom: 20px;
+}
+.block__header{
+    padding: 0 30px;
+    height: 62px;
+    font-size: 19px;
+    line-height: 62px;
+    border-bottom: 1px solid #f2f2f2;
+    display: flex;
+    justify-content: space-between;
+    .block__header_h{
+      font-weight: 700;
+    }
+    .block__header_pn{
+      font-weight: normal;
+      font-size: 14px;
+      padding-left: 15px;
+      height: 20px;
+      line-height: 20px;
+      display: inline-block;
+      border-left: 1px solid #ccc;
+      margin-left:15px;
+    }
+}
+.form__cont{
+  h3{
+    font-weight: 700;
+    font-size: 17px;
+  }
+}
+.form__item{
+  font-size: 14px;
+  div{
+    color: #999;
+  }
+  p{
+    color: #333;
+  }
+}
+.click_blue{
+  color: #1890ff;
+  cursor: pointer;
+}
+.pagination{
+  margin: 30px 0;
+  float: right;
+}
+.form_box{
+  width: 100%;
+  padding:24px 24px 0 24px; 
+  .form_by{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .form_start{
+    width: 100%;
+  }
+  .form_by_fn{
+    width: 100%;
+  }
+  .form_box_righe{
+    text-align: right;
+    margin-left: auto;
+    button{
+      margin-left: 10px;
+      .form_box_righe_n1{
+        font-size: 18px;
+        color: #666;
+        position: relative;
+        top: 2px;
+      }
+    }
+  }
+}
+
+.optional_modal {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  :global{ 
+    .ant-checkbox-group-item {
+      font-size: 14px;
+      padding: 6px 8px;
+      margin: 0 !important;
+      flex: 1;
+      text-align: center;
+      box-sizing: border-box;
+      width: calc((100% - 5px) / 6);   
+      min-width: calc((100% - 5px) / 6);
+      max-width: calc((100% - 5px) / 6);
+    }
+  }
+}
+
+.bottom_btn_box {
+  position: fixed;
+  bottom: 0;
+  z-index: 99;
+  width: calc(100% - 160px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  line-height: 44px;
+  background: #fff;
+  border-top: 1px solid #f0f0f0;
+}
+
+.spin_loading {
+  position: fixed;
+  top: 0;
+  z-index: 98;
+  width: calc(100% - 160px);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:#000000;
+  opacity:0.5;
+  -moz-opacity:0.5;
+  filter:alpha(opacity=50);
+}
+.block_cent{
+  text-align: center;
+  padding: 16px 0;
+}
+
+.checkBox_select {
+  padding: 6px 8px !important; 
+}

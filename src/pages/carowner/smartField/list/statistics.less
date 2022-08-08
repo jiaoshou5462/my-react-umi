@@ -1,0 +1,38 @@
+@import (reference) '~@/css/common.less';
+
+.detail_block{
+  .content-box-shadow;
+  background-color: #fff;
+}
+.table_box{
+  .content-box-shadow;
+  background-color: #fff;
+}
+.word_box{
+  overflow: hidden;
+  padding: 16px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  .word_item{
+    flex: 0 0 33.33%;
+    margin-bottom: 24px;
+    .word_name{
+      color: #666;
+      margin-bottom: 14px;
+    }
+    .word_info{
+      color: #333;
+    }
+  }
+}
+.statisticsDetail{
+  .detail_block{
+    box-shadow: none;
+  }
+  .table_box{
+    box-shadow: none;
+  }
+  .word_box{
+    padding-top: 0;
+  }
+}

@@ -1,0 +1,135 @@
+.detailBox {
+  background-color: #fff;
+
+  .title {
+    line-height: 60px;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 24px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+
+    .backBtn {
+      margin-top: 14px;
+    }
+  }
+
+  .info,
+  .invoice {
+    padding: 24px;
+
+    .info_title {
+      font-size: 14px;
+      font-weight: 600;
+      height: 40px;
+      line-height: 40px;
+    }
+
+    .info_data {
+      overflow: hidden;
+      margin-top: 10px;
+
+      .form_item {
+        float: left;
+        width: 33%;
+        line-height: 30px;
+        margin-bottom: 6px;
+
+        span {
+          color: #ff0000;
+        }
+      }
+    }
+
+    .form__cont {
+      padding: 36px;
+      text-align: center;
+    }
+
+    .form__item {
+      width: 25%;
+      float: left;
+      // margin-bottom: 24px;
+    }
+  }
+
+  .invoice {
+    padding-top: 0px;
+  }
+
+  .typeBox {
+    width: 150px;
+    background: #F4F7FB;
+    border-radius: 4px;
+    text-align: center;
+    padding: 10px 0;
+
+    .size_18 {
+      font-size: 18px;
+    }
+  }
+
+  .blueCont {
+    margin: 24px;
+    color: #1890FF;
+  }
+
+  .tableData {
+    padding: 0 24px;
+    padding-bottom: 30px;
+
+    .tableData_title {
+      height: 60px;
+      line-height: 60px;
+      font-size: 16px;
+      font-weight: 600;
+      border-bottom: 1px solid #eee;
+      position: relative;
+
+      .tableData_btn1,
+      .tableData_btn2 {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .tableData_btn1 {
+        right: 160px;
+      }
+    }
+
+  }
+
+  .annotation {
+    background-color: #ccc;
+    padding: 10px 24px;
+    line-height: 30px;
+  }
+
+  .btns {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 30px;
+
+    Button {
+      margin: 0 10px;
+    }
+  }
+
+  .interspace {
+    background-color: rgba(242, 242, 242, 1);
+    height: 10px;
+  }
+
+  .previewImg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+}

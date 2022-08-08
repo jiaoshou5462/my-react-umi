@@ -1,0 +1,122 @@
+@import (reference) '~@/css/common.less';
+
+.info_data {
+  overflow: hidden;
+  .form_item {
+    float: left;
+    width: 50%;
+    line-height: 30px;
+    margin-bottom: 4px;
+    .info_data_color {
+      color: #ff0000;
+    }
+  }
+}
+.info_title {
+  font-size: 14px;
+  font-weight: 600;
+  height: 40px;
+  line-height: 40px;
+}
+
+.tab_btn {
+  padding: 0 8px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1890ff;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  span{
+    font-size: 14px;
+  }
+}
+.functions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .tab_btn {
+    margin: auto 2%;
+  }
+  .configBox {
+    width: 40%;
+    height: 450px;
+    border: 1px solid #ccc;
+    border-bottom: 0;
+    .configBox_title {
+      border-bottom: 1px solid #ccc;
+      padding-left: 16px;
+      line-height: 40px;
+      background-color: #fcfcfc;
+    }
+    .configBox_tree {
+      height: 410px;
+      padding: 10px;
+      overflow-y: auto;
+      border-bottom: 1px solid #ccc;
+      display: flex;
+      flex-direction: column;
+      .configBox_scroll_left{
+        .configBox_scroll;
+        margin-top: -15px;
+        height: 410px;
+      }
+      .configBox_pageList {
+        overflow: hidden;
+        height: 36px;
+        line-height: 36px;
+        border-bottom: 1px solid #eee;
+        &_name {
+          float: left;
+        }
+        &_view, &_config {
+          float: right;
+          cursor: pointer;
+          .main-color;
+        }
+        &_config {
+          margin-right: 8px;
+        }
+      }
+    }
+    .configBox_search{
+      padding: 10px 0;
+    }
+    .configBox_tree_right{
+      .configBox_tree;
+      min-height: 0;
+      overflow: hidden;
+    }
+    .configBox_scroll{
+      padding: 10px;
+      padding-right: 10px;
+      flex: auto;
+      min-height: 0;
+      width: 100%;
+      overflow-y: auto;
+    }
+  }
+}
+.headInfo {
+  padding-bottom: 24px;
+  >div {
+    height: 32px;
+    line-height: 32px;
+  }
+}
+.visibleBtn {
+  >div {
+    margin-bottom: 10px;
+  }
+}
+.border_line {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+  margin: 10px 0;
+}
+.wrap_width{
+  width: 300px !important;
+}

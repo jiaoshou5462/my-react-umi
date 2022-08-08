@@ -1,0 +1,24 @@
+.wrap_box {
+  width: 100%;
+  padding: 16px 20px;
+  height: 100%;
+  overflow-y: auto;
+  .wrap_box_li {
+    margin-top: 10px;
+    &>span{
+      display: block;
+      padding-bottom: 10px;
+    }
+  }
+}
+.require_lable{
+  &::before{
+    content: '*';
+    display: inline-block;
+    margin-right: 4px;
+    color: #ff4d4f;
+    font-size: 14px;
+    font-family: SimSun,sans-serif;
+    line-height: 1;
+  }
+}

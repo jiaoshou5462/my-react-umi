@@ -1,0 +1,99 @@
+.select-ban{
+  user-select: none;
+}
+.userAttributeBox {
+  flex: 0 0 100%;
+  .title {
+    padding: 5px 15px;
+    display: flex;
+    justify-content: space-between;
+    .leftBox {
+
+      .check {
+        padding: 5px;
+      }
+    }
+
+    .rightBox {
+      cursor: pointer;
+      .icon {
+        color: #04cb94;
+        padding: 0 5px;
+      }
+    }
+  }
+  .oneBox{
+    display: 'flex';
+    justify-Content: "space-between";
+    position: relative;
+    padding-right: 15px;
+  }
+  .attributeBox {
+    display: flex;
+    overflow: auto;
+    flex: auto;
+    padding: 10px 0;
+    .filterCon {
+      .relation {
+        display: flex;
+        flex-direction: column;
+        width: 40px;
+        height: 100%;
+        align-items: center;
+
+        .relationLine {
+          width: 2px;
+          background: #e9f0f7;
+          flex-grow: 1;
+        }
+
+        .clickBtn {
+          font-size: 12px;
+          background-color: #d6efe8;
+          color: #00bf8a;
+          padding: 3px;
+          border-radius: 3px;
+          cursor: pointer;
+          .select-ban;
+        }
+      }
+    }
+    .attributeItem{
+      padding-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .attributeFormItem{
+      display: flex;
+      flex: auto;
+    }
+    .condition {
+      flex: auto;
+    }
+    .activeBtn {
+      position: absolute;
+      right: 30px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: 80px;
+      .addBtn {
+        font-size: 14px;
+        margin-right: 10px;
+        cursor: pointer;
+        .icon {
+          color: #6dd5b0;
+          padding: 0 5px;
+        }
+      }
+    }
+    .deletebtn {
+      font-size: 14px;
+      color: #778ca2;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+  }
+}

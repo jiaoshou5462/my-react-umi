@@ -1,0 +1,216 @@
+.select-ban{
+  user-select: none;
+}
+.userActionBox {
+  border: 1px solid #ccc;
+  margin-top: 20px;
+  .title {
+    padding: 5px 15px;
+    display: flex;
+    justify-content: space-between;
+    .leftBox {
+
+      .check {
+        padding: 5px;
+      }
+    }
+
+    .rightBox {
+      cursor: pointer;
+      .icon {
+        color: #04cb94;
+        padding: 0 5px;
+      }
+    }
+  }
+  .oneBox{
+    display: 'flex';
+    justify-Content: "space-between";
+    position: relative;
+    padding-right: 15px;
+  }
+  .attributeBox {
+    display: flex;
+    overflow: auto;
+    flex: auto;
+    padding: 10px 0;
+    .filterCon {
+      .relation {
+        display: flex;
+        flex-direction: column;
+        width: 40px;
+        height: 100%;
+        align-items: center;
+
+        .relationLine {
+          width: 2px;
+          background: #e9f0f7;
+          flex-grow: 1;
+        }
+
+        .clickBtn {
+          font-size: 12px;
+          background-color: #d6efe8;
+          color: #00bf8a;
+          padding: 3px;
+          border-radius: 3px;
+          cursor: pointer;
+          .select-ban;
+        }
+      }
+    }
+    .attributeItem{
+      padding-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      flex: auto;
+    }
+    .attributeFormItem{
+      display: flex;
+      flex: auto;
+      flex-wrap: wrap;
+    }
+    .condition {
+      flex: auto;
+    }
+    .activeBtn {
+      height: 30px;
+      padding: 0 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      white-space: nowrap;
+      cursor: pointer;
+      .icon {
+        color: #04cb94;
+        padding: 0 5px;
+      }
+    }
+    .deletebtn {
+      font-size: 14px;
+      height: 30px;
+      color: #778ca2;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+  }
+  .filterOuter{
+    flex:0 0 100%;
+    display: flex;
+    padding-top: 10px;
+    padding-left: 30px;
+    .filterText{
+      flex: 0 0 100px;
+      padding-top: 10px;
+      padding-right: 20px;
+      border-right: 3px solid #00bf8a;
+      text-align: right;
+    }
+    .filterRelation{
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      align-items: center;
+      flex: none;
+      padding-left: 20px;
+      .relationLine {
+        width: 2px;
+        background: #e9f0f7;
+        flex-grow: 1;
+      }
+      .clickBtn {
+        font-size: 12px;
+        background-color: #d6efe8;
+        color: #00bf8a;
+        padding: 3px;
+        border-radius: 3px;
+        cursor: pointer;
+        .select-ban;
+      }
+    }
+    .filterBox{
+      width: 400px;
+      padding: 5px 0;
+      padding-left: 20px;
+      min-width: 0;
+      display: flex;
+      flex-wrap: wrap;
+      .filterIconBox{
+        display: flex;
+        padding: 0 10px;
+        align-items: center;
+      }
+      .closeBtn{
+        cursor: pointer;
+        padding-left: 5px;
+        color: #666;
+        &:hover{
+          color: #333;
+        }
+      }
+    }
+  }
+  .totalOuter{
+    flex: 0 0 100%;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 10px;
+    .totalAddBtn{
+      cursor: pointer;
+      font-size: 18px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      color: #00bf8a;
+    }
+    .totalRelation{
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      align-items: center;
+      flex: none;
+      padding-left: 20px;
+      .relationLine {
+        width: 2px;
+        background: #e9f0f7;
+        flex-grow: 1;
+      }
+      .clickBtn {
+        font-size: 12px;
+        background-color: #d6efe8;
+        color: #00bf8a;
+        padding: 3px;
+        border-radius: 3px;
+        cursor: pointer;
+        .select-ban;
+      }
+    }
+    .totalBox{
+      flex: auto;
+      padding-left: 15px;
+    }
+    .totalItem{
+      padding-bottom: 5px;
+      width: 100%;
+      display: flex;
+      .closeBtn{
+        cursor: pointer;
+        padding-left: 10px;
+        color: #666;
+        display: flex;
+        align-items: center;
+        &:hover{
+          color: #333;
+        }
+      }
+    }
+  }
+  .addFilter{
+    display: flex;
+    align-items: center;
+    flex: none;
+    cursor: pointer;
+  }
+}

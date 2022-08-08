@@ -1,0 +1,43 @@
+.box{
+  width: 100%;
+  height: 100%;
+  padding: 16px 20px;
+}
+.require_lable{
+  &::before{
+    content: '*';
+    display: inline-block;
+    margin-right: 4px;
+    color: #ff4d4f;
+    font-size: 14px;
+    font-family: SimSun,sans-serif;
+    line-height: 1;
+  }
+}
+.color_box{
+  display: flex;
+  align-items: center;
+  position: relative;
+  .reset_btn{
+    margin-left: 20px;
+    color: #4B7FE8;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+}
+.upload_box_bg>div{
+  width: 100px;height: 100px;
+}
+.bg_tips{
+  font-size: 12px;
+  padding-bottom: 10px;
+}
+.empty_tips{
+  padding-top: 200px;
+  font-size: 20px;
+  width: 100%;
+  color: #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

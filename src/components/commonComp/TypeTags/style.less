@@ -1,0 +1,27 @@
+.type_tags{
+  display: inline-block;
+  height: 24px;
+  position: relative;
+  .text_color{
+    position: relative;
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 0 8px;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+  }
+  .bg{
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;top: 0;
+    border-radius: 2px;
+  }
+}
+.type_tags+.type_tags{
+  margin-left: 8px;
+}

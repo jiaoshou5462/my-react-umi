@@ -1,0 +1,118 @@
+[
+  {
+    "path": "operate",
+    "name": "运营",
+    "icon": "ContactsOutlined",
+    "routes": [{
+      "path": "/operate/Launch",
+      "name": "营销投放",
+      "routes": [{
+        "path": "/cardgrantManage/grantList",
+        "name": "卡券投放"
+      },
+      {
+        "path": "/operate/marketingProject",
+        "name": "营销项目"
+      },{
+        "path": "/operate/marketingProject",
+        "name": "营销项目"
+      }]
+    }]
+  },
+  {
+    "path": "/solution",
+    "name": "结算",
+    "icon": "AccountBookOutlined",
+    "routes": [
+      {
+        "path": "/financeManage",
+        "name": "账单管理",
+        "routes": [
+          {
+            "path": "/financeManage/billList",
+            "name": "渠道账单"
+          }
+        ]
+      },
+      {
+        "path": "/payableInvoices",
+        "name": "应付及发票管理",
+        "routes": [
+          {
+            "path": "/payableInvoices/list",
+            "name": "应付及发票"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/dataModule",
+    "name": "数据",
+    "icon": "BarChartOutlined",
+    "routes": [
+      {
+        "path": "/dataModule/tagModule/tagPanel",
+        "name": "标签面板"
+      },
+      {
+        "path": "/dataModule/groupModule/grouplList",
+        "name": "用户群列表"
+      },
+      {
+        "path": "/dataModule/tagModule/changeRecord",
+        "name": "变更记录"
+      }
+    ]
+  },
+  {
+    "path": "/setting",
+    "name": "设置",
+    "icon": "SettingOutlined",
+    "routes": [
+      {
+        "path": "/setting/authority",
+        "name": "权限管理",
+        "routes": [
+          {
+            "path": "/privilegeManage/role",
+            "name": "角色管理"
+          },
+          {
+            "path": "/privilegeManage/account",
+            "name": "账号管理"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/carowner",
+    "name": "车主",
+    "icon": "UserOutlined",
+    "routes": [
+      {
+        "path": "/platformBuild",
+        "name": "平台搭建",
+        "routes": [
+          {
+            "path": "/platformBuild/growthSystem/home",
+            "name": "成长体系"
+          },
+          {
+            "path": "/platformBuild/growthSystem/levelConfig",
+            "name": "等级配置"
+          },
+          {
+            "path": "/platformBuild/growthSystem/rightList",
+            "name": "权益管理"
+          },
+          {
+            "path": "/platformBuild/growthSystem/taskManage",
+            "name": "任务管理"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,173 @@
+@import (reference) '~@/css/common.less';
+.soso_box1_isopen{
+  color: #1890FF;
+  cursor: pointer;
+  margin-left: 5px;
+}
+.block__cont{
+  .content-box-shadow;
+}
+.table_part{
+  padding: 24px;
+  overflow: auto;
+}
+.a_status{
+  position: relative;
+}
+.start_use::before,.stop_use::before{
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #03A854;
+}
+.start_use{
+  color: #03A854;
+}
+.stop_use::before{
+  background: #ccc;
+}
+.block__header{
+    padding: 0 30px;
+    height: 62px;
+    font-size: 18px;
+    line-height: 62px;
+    padding: 0 30px;
+    border-bottom: 1px solid #f2f2f2;
+    font-weight: bold;
+}
+.block__header__f{
+  padding: 0 30px;
+  height: 62px;
+  line-height: 62px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+}
+.form__cont{
+  padding: 24px 24px 0 24px !important;
+}
+.btn_radius{
+  border-radius: 6px !important;
+}
+.form__item{
+  width: 360px;
+}
+.pagination{
+  margin-top: 30px;
+  float: right;
+}
+.click_blue{
+  color: #1890ff;
+  cursor: pointer;
+  span {
+    margin-right: 6px;
+  }
+}
+.list_red{
+  color: #ff422b;
+}
+.info_wrap_i1{
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.25);
+  padding-left: 46%;
+  position: relative;
+  top: -12px;
+}
+.copy_item{
+  display: flex;
+  width: 100%;
+  padding: 20px;
+}
+.copy_item_left{
+  width: 130px;
+  padding-right: 10px;
+  line-height: 32px;
+  text-align: right;
+}
+.copy_item_right{
+  width: 360px;
+  padding-left: 10px;
+}
+.rangePicker{
+  width: 100%;
+}
+.tag{
+  cursor: pointer;
+}
+.content_part{
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  .block_left_cont_posi{
+    flex: 0 0 270px;
+    margin-right: 20px;
+  }
+  .block_left_cont{
+    .content-box-shadow;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    width:270px;
+    height: 100%;
+    margin-right: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    .list_item_box{
+      min-height: 0;
+      flex: 0 1 auto;
+      ul{
+        max-height: 100%;
+        overflow-y: auto;
+      }
+    }
+    .edit_title{
+      flex: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+  }
+  .all_article{
+    font-weight: normal;
+    color:#1890ff;
+    float: right;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .btn_content{
+    float: right;
+  }
+  .add_news{
+      margin-right: 20px;
+    }
+  .list{
+    line-height: 36px;
+    padding: 0 20px;
+    border-bottom: 1px solid #eee;
+    .list_title{
+      margin-right: 20px;
+      cursor: pointer;
+    }
+    .list_icon{
+      cursor: pointer;
+      margin: 0 10px;
+    }
+  }
+  .list_active{
+    background: #ddd;
+  }
+
+  .isTop_icon{
+    width: 36px;
+    height: 18px;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+}
+

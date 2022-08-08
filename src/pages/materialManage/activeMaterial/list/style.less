@@ -1,0 +1,111 @@
+@import (reference) '~@/css/common.less';
+.soso_box1_isopen{
+  color: #1890FF;
+  cursor: pointer; 
+  margin-left: 5px;
+}
+.block__cont{
+  .content-box-shadow;
+  padding: 24px;
+}
+.block__cont__t{
+  .content-box-shadow;
+  margin-top: 28px;
+}
+.table_part{
+  padding: 24px;
+  overflow: auto;
+}
+.block__header{
+    padding: 0 30px;
+    height: 62px;
+    font-size: 18px;
+    line-height: 62px;
+    padding: 0 30px;
+    border-bottom: 1px solid #f2f2f2;
+}
+.block__header__f{
+  padding: 0 30px;
+  height: 62px;
+  line-height: 62px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+}
+.pagination{
+  margin-top: 30px;
+  float: right;
+}
+.click_blue{
+  color: #1890ff;
+  cursor: pointer;
+  span {
+    margin-right: 6px;
+  }
+}
+.rangePicker{
+  width: 100%;
+}
+.add_new_theme{
+  float: right;
+}
+.all_select{
+  margin-bottom: 8px;
+}
+.status_1{
+  position: relative;
+}
+.status_1::before{
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background:#facd91;
+  top: 8px;
+  left: -14px;
+}
+.status_2{
+  position: relative;
+}
+.status_2::before{
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background:#005854;
+  top: 8px;
+  left: -14px;
+}
+.status_3{
+  position: relative;
+}
+.status_3::before{
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background:#D9001b;
+  top: 8px;
+  left: -14px;
+}
+.dropdown_list{
+  text-align: center;
+  :global{
+    .ant-checkbox{
+      display: none;
+    }
+    .ant-space-item{
+      text-align: center;
+    }
+    .ant-checkbox-wrapper-checked{
+      color:#1890ff
+    }
+  }
+}
+.drop_btn{
+  cursor: pointer;
+}

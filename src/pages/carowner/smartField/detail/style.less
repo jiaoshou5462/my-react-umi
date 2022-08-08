@@ -1,0 +1,104 @@
+@import (reference) '~@/css/common.less';
+
+.detail_block{
+  .content-box-shadow;
+  background-color: #fff;
+}
+.require_lable{
+  &::before{
+    content: '*';
+    display: inline-block;
+    margin-right: 4px;
+    color: #ff4d4f;
+    font-size: 14px;
+    font-family: SimSun,sans-serif;
+    line-height: 1;
+  }
+}
+.form_title{
+  padding: 8px 0;
+  padding-left: 32px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+}
+.form_box{
+  padding: 32px 0;
+  display: flex;
+  justify-content: center;
+  .form_mid{
+    width: 726px;
+    .form_block{
+      padding-top: 24px;
+      margin-bottom: 24px;
+      position: relative;
+      .cant_edit{
+        position: absolute;
+        z-index: 10;
+        width: 100%;height: 100%;
+        left: 0;top: 0;
+        cursor: not-allowed;
+      }
+      .list_item{
+        padding-bottom: 20px;
+        .item_top{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 24px;
+          padding-bottom: 24px;
+          div{
+            font-size: 16px;
+            color: #000;
+            font-weight: 500;
+          }
+          span{
+            color: #ED1F45;
+            cursor: pointer;
+          }
+        }
+      }
+      :global(.ant-input){
+        max-width: 435px;
+      }
+    }
+    .upload_img{
+      width: 100px;height: 100px;
+    }
+    .upload_box_bg{
+      &>div{
+        width: 100px;height: 100px;
+      }
+    }
+    .tag_box{
+      width: 600px;
+      &>span{
+        border-radius: 22px !important;
+        padding: 0 16px !important;
+        margin-bottom: 5px;
+      }
+      .tag_add{
+        border: 1px dashed #ccc !important;
+        cursor: pointer;
+      }
+    }
+    .btn_box{
+      display: flex;
+      justify-content: center;
+      padding-top: 16px;
+      padding-bottom: 40px;
+    }
+  }
+}
+.content_empty{
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+}
+

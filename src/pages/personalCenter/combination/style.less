@@ -1,0 +1,40 @@
+@import (reference) '~@/css/common.less';
+
+.block__cont {
+  .content-box-shadow;
+  min-height: calc(100vh - 120px);
+  margin-bottom: 0;
+}
+.row {
+  padding: 24px;
+  height: 100%;
+}
+.tree_row {
+  border-right: 1px solid #E8E8E8;
+  overflow-y: auto;
+  height: 100%;
+  min-height: 400px;
+}
+.menu_block{
+  font-size: 16px;
+  padding-bottom: 5px;
+  .add_Icon,.delete_Icon{
+    color: #666;
+    margin-left: 10px;
+  }
+  .meun_name,.add_Icon,.delete_Icon{
+    &:hover{
+      color: #1890ff;
+    }
+  }
+}
+.content_row{
+  overflow-y: auto;
+  height: 100%;
+}
+.formBox {
+  padding: 0 24px !important;
+}
+.form_item1{
+  margin-bottom: 26px;
+}

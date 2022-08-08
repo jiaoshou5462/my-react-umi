@@ -1,0 +1,760 @@
+import React, { useEffect, useState } from "react"
+import { connect, history } from 'umi'
+import { Row, Col, Space, Table, Button, Select, DatePicker, message, Tag, Input, Form, Modal, Pagination } from "antd"
+import style from "./style.less"
+import zh_CN from 'antd/lib/locale-provider/zh_CN'
+import locale from 'antd/lib/date-picker/locale/zh_CN'
+import moment from 'moment'
+import 'moment/locale/zh-cn'
+import { Column } from "rc-table"
+moment.locale('zh-cn')
+import { fmoney } from '@/utils/date'
+const { RangePicker } = DatePicker
+const { Option, OptGroup } = Select;
+const { TextArea } = Input;
+
+// 2.查看预采详情
+const DetailChargeed = (props) => {
+  let thisDetail = JSON.parse(localStorage.getItem('finance_list_itemed'));
+  let { dispatch, infoDetailList, total,
+    cardCategoryList, cardTypeList, channelBalanceBillInfo,
+    channelBalanceBillInvoiceApplyInfo, proStatisticsList,
+    isLastConfirm, isLastReject } = props,
+    [form] = Form.useForm(),
+    [countDetail, setCountDetail] = useState(thisDetail), //基本信息
+    [rejectReason, setRejectReason] = useState('')//驳回理由
+
+  const [isModalFirstConfirm, setIsModalFirstConfirm] = useState(false);
+  const [isModalFirstReject, setIsModalFirstReject] = useState(false);
+  const [isModalConfirm, setIsModalConfirm] = useState(false);
+  const [isModalReject, setIsModalReject] = useState(false);
+
+  // 筛选导出需要
+  let [cardId, setCardId] = useState('');
+  let [couponSkuName, setCouponSkuName] = useState('');
+  let [discountsType, setDiscountsType] = useState(null);
+  let [couponCategoryType, setCouponCategoryType] = useState(null);
+  let [balanceNodeVal, setBalanceNode] = useState(null);
+
+  let [payload, setPayload] = useState({
+    pageNum: 1,
+    pageSize: 10,
+    query: {
+      channelId: countDetail.channelId,//客户名称
+      billType: countDetail.billType,//业务类型 1：据实服务 2：预采投放 3：数字SaaS 4:增值服务
+      billId: history.location.query.billId,//账单序号
+
+      orderNo: '',//订单编号
+      serviceTypeId: null,//服务类型
+      serviceId: null,//服务项目
+      plateNo: '',//车牌号
+      orderCreateTimeStart: '',//	订单创建时间起始
+      orderCreateTimeEnd: '',//订单创建时间终止
+      orderStatus: null,//服务状态==================(1.据实服务)
+      cardId: null,//	卡券编号
+      couponSkuName: '',//卡券标题
+      discountsType: null,//卡券种类1、优惠券 2、抵用券 3、打折券
+      couponCategoryType: null,//卡券品类1、洗车券2、送花券 3、停车券 4、保养券、5钣喷券
+      balanceNode: null,//结算节点:0发放,1领取,2使用
+      balanceNodeBeginTime: '',//结算开始时间
+      balanceNodeEndTime: '',//结算结束时间===============（2.预采）
+
+      serviceName: '',//服务名称
+      // uploadImageFlag: 0//是否上传照片:0否1是
+
+    }
+  })
+
+  useEffect(() => {
+    getCardCategoryList()//获取卡券品类-种类
+    billInfo()//查看详情
+    infoList()//2结算明细列表
+    cardBalanceProjectStatistics()
+  }, [payload])
+
+  // 1查看已入账
+  const billInfo = () => {
+    dispatch({
+      type: 'financeManageModel/billInfo',
+      payload: {
+        method: 'get',
+        billId: history.location.query.billId,
+        params: {}
+      }
+    })
+  }
+  // 2入账详情-结算明细列表
+  const infoList = () => {
+    dispatch({
+      type: 'financeManageModel/infoList',
+      payload: {
+        method: 'postJSON',
+        params: payload
+      }
+    })
+  }
+  // 3获取卡券品类-种类
+  let getCardCategoryList = () => {
+    dispatch({
+      type: 'financeManageModel/cardCategoryAndTypeList',
+      payload: {
+        method: 'get',
+        params: {}
+      }
+    })
+  }
+  // 查询卡券项目统计
+  const cardBalanceProjectStatistics = () => {
+    dispatch({
+      type: 'financeManageModel/cardBalanceProjectStatistics',
+      payload: {
+        method: 'postJSON',
+        params: payload
+      }
+    })
+  }
+
+  /*结算节点，0发放,1领取,2使用*/
+  let balanceNode = [
+    { title: '发放', id: '0' },
+    { title: '领取', id: '1' },
+    { title: '使用', id: '2' }
+  ]
+
+  // 2导出(2预采)
+  const exportUnChargeed = () => {
+    dispatch({
+      type: 'financeManageModel/billDetail',
+      payload: {
+        method: 'postJsonExcel',
+        params: payload.query
+      },
+      callback: (res) => {
+        const url = window.URL.createObjectURL(new Blob([res], { type: "application/vnd.ms-excel" }))
+        const link = document.createElement('a')
+        link.style.display = 'none'
+        link.href = url
+        link.setAttribute('download', '结算明细.xls')
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+      }
+    })
+  }
+  // 3点击批量调整金额
+  const adjustmentBatch = () => {
+    history.push({
+      pathname: '/financeManage/billList/adjustmentBatch',
+      query: {
+        billId: history.location.query.billId
+      }
+    })
+  }
+  // 4点击批量撤销入账
+  const revokeBatch = () => {
+    history.push({
+      pathname: '/financeManage/billList/revokeBatch',
+      query: {
+        billId: history.location.query.billId
+      }
+    })
+  }
+
+  // 时间处理
+  let balanceNodeTime = (text, all) => {
+    let textTime = text.substring(0, 10)
+    return <div>{textTime}</div>
+  }
+  // 2预采投放
+  let launchColumns = [
+    { title: '卡券/卡包编号', dataIndex: 'cardId', key: 'cardId' },
+    { title: '卡券/卡包标题', dataIndex: 'couponSkuName', key: 'couponSkuName' },
+    { title: '投放类型', dataIndex: 'couponPackageFlagStr', key: 'couponPackageFlagStr' },
+    {
+      title: '卡券形式', dataIndex: 'discountsTypeName', key: 'discountsTypeName',
+      render: (text, all) => {
+        return <>
+          {
+            all.couponPackageFlag == '0' ?
+              <span>{text}</span>
+              :
+              <span>--</span>
+          }
+        </>
+      }
+    },
+    {
+      title: '卡券品类', dataIndex: 'couponCategoryTypeName', key: 'couponCategoryTypeName',
+      render: (text, all) => {
+        return <>
+          {
+            all.couponPackageFlag == '0' ?
+              <span>{text}</span>
+              :
+              <span>--</span>
+          }
+        </>
+      }
+    },
+    { title: '所属项目', dataIndex: 'marketProjectName', key: 'marketProjectName', },
+    { title: '面值/折扣（元）', dataIndex: 'faceValue', key: 'faceValue', },
+    {
+      title: '原结算金额（元）', align: "right", dataIndex: 'balanceAmount', key: 'balanceAmount',
+      render: (text, all) => {
+        return <span style={{ color: '#f00' }}>{text}</span>
+      }
+    },
+    {
+      title: '调整后结算金额（元）', align: "right", dataIndex: 'adjustAmount', key: 'adjustAmount',
+      render: (text, all) => {
+        return <span style={{ color: '#f00' }}>{text}</span>
+      }
+    },
+    { title: '结算日期', dataIndex: 'balanceNodeTime', key: 'balanceNodeTime' },
+    // {
+    //   title: '结算节点',
+    //   dataIndex: 'balanceNodeName',
+    //   key: 'balanceNodeName'
+    // }, 
+    //  {
+    //   title: '操作',
+    //   dataIndex: 'option',
+    //   key: 'option',
+    //   render: (text, all) => option(text, all)
+    // }
+  ]
+  // 判断操作栏是否显示
+  // if (history.location.query.recordDetail == 'view') {
+  //   launchColumns = launchColumns.slice(0, launchColumns.length - 1);
+  // }
+  let option = (text, all) => {
+    return <div ><Space size="middle"><span className={style.click_blue}>调整金额</span><span className={style.click_blue}>撤销入账</span></Space></div>
+  }
+
+
+  // 3点击终审确认
+  let confirmInstance = () => {
+    setIsModalConfirm(true);
+  }
+  // 3-1确认终审
+  let handleConfirmOk = () => {
+    dispatch({
+      type: 'financeManageModel/udpateBill',
+      payload: {
+        method: 'postJSON',
+        params: {
+          billId: history.location.query.billId,//	账单ID
+          billStatus: 4,//更新账单状态 2:确认账单 4:终审确认5:提交审核 6:初审驳回 7:初审确认 8:终审驳回
+          rejectReason: ""//驳回原因
+        }
+      },
+      callback: (res) => {
+        console.log(res, '666')
+        if (res.result.code == '0') {//成功
+          message.success({
+            content: '终审确认提交成功！',
+          })
+          // dispatch({
+          //   type: 'financeManageModel/isLastConfirm',
+          //   payload: true
+          // });
+          // dispatch({
+          //   type: 'financeManageModel/isLastReject',
+          //   payload: true
+          // });
+          setIsModalConfirm(false);
+          billInfo()//刷新结算明细列表
+        } else {//失败
+          message.warning({
+            content: res.result.message,
+          });
+        }
+      }
+    })
+  }
+  let handleConfirmCancel = () => {
+    setIsModalConfirm(false);
+  }
+
+
+  // 4点击终审驳回
+  let rejectInstance = () => {
+    setIsModalReject(true);
+  }
+  // 终审驳回理由
+  let rejectText = (e) => {
+    setRejectReason(e.target.value)
+  }
+  // 4-1确认终审驳回
+  let handleRejectOk = () => {
+    // console.log(rejectReason, '66')
+    if (rejectReason.replace(/^\s+|\s+$/g, "") == '') {//去除两头空格
+      message.warning('请填写驳回理由！')
+    } else {
+      dispatch({
+        type: 'financeManageModel/udpateBill',
+        payload: {
+          method: 'postJSON',
+          params: {
+            billId: history.location.query.billId,//	账单ID
+            billStatus: 8,//更新账单状态 2:确认账单 4:终审确认5:提交审核 6:初审驳回 7:初审确认 8:终审驳回
+            rejectReason: rejectReason//驳回原因
+          }
+        },
+        callback: (res) => {
+          if (res.result.code == '0') {//成功
+            message.success({
+              content: '终审驳回提交成功！',
+            })
+            dispatch({
+              type: 'financeManageModel/isLastReject',
+              payload: true
+            });
+            dispatch({
+              type: 'financeManageModel/isLastConfirm',
+              payload: true
+            });
+            setIsModalReject(false);
+            billInfo()//刷新结算明细列表
+          } else {//失败
+            message.warning({
+              content: res.result.message,
+            });
+          }
+        }
+      })
+
+    }
+  }
+  let handleRejectCancel = () => {
+    setIsModalReject(false);
+  }
+
+  // 导出（项目维度）
+  let exportDimension = () => {
+    dispatch({
+      type: 'financeManageModel/exportCardProjectDetail',
+      payload: {
+        method: 'postJsonExcel',
+        params: payload.query
+      },
+      callback: (res) => {
+        const url = window.URL.createObjectURL(new Blob([res], { type: "application/vnd.ms-excel" }))
+        const link = document.createElement('a')
+        link.style.display = 'none'
+        link.href = url
+        link.setAttribute('download', '项目维度.xls')
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+      }
+    })
+  }
+
+  /*3查询按钮*/
+  let searchRChargeBtn = (values) => {
+    // 判断是否存在
+    if (values.balanceNodeTime) {
+      payload.query.balanceNodeBeginTime = values.balanceNodeTime[0].format('YYYY-MM-DD');
+      payload.query.balanceNodeEndTime = values.balanceNodeTime[1].format('YYYY-MM-DD');
+    }
+    let data = {
+      pageNum: 1,
+      pageSize: 10,
+      query: {
+        channelId: countDetail.channelId,//客户名称
+        billType: countDetail.billType,//	业务类型
+        billId: history.location.query.billId,//
+
+        cardId: values.cardId || '',//卡券编号
+        couponSkuName: values.couponSkuName || '',//卡券标题
+        discountsType: values.cardTypeList || null,//	卡券种类1、优惠券 2、抵用券 3、打折券
+        couponCategoryType: values.cardCategoryList || null,//卡券品类1、洗车券2、送花券 3、停车券 4、保养券、5钣喷券
+        balanceNode: values.balanceNode || null,//结算节点:0发放,1领取,2使用
+        balanceNodeBeginTime: payload.query.balanceNodeBeginTime || '',//结算开始时间
+        balanceNodeEndTime: payload.query.balanceNodeEndTime || ''//结算结束时间==========(2预采投放)
+      }
+    }
+    setPayload(data);
+    // 判空
+    // for (let keys in values) {
+    //   console.log(keys)
+    //   if (values[keys]) { data.query[keys] = values[keys] }
+    // }
+
+  }
+
+  /*4重置*/
+  let resetBtnEvent = () => {
+    form.resetFields();//重置
+    let data = {
+      pageNum: 1,
+      pageSize: 10,
+      query: {
+        channelId: countDetail.channelId,//客户名称
+        billType: countDetail.billType,//	业务类型
+        billId: history.location.query.billId,//账单序号
+
+        cardId: null,//卡券编号
+        couponSkuName: '',//卡券标题
+        discountsType: null,//	卡券种类1、优惠券 2、抵用券 3、打折券
+        couponCategoryType: null,//卡券品类1、洗车券2、送花券 3、停车券 4、保养券、5钣喷券
+        balanceNode: null,//结算节点:0发放,1领取,2使用
+        balanceNodeBeginTime: '',//结算开始时间
+        balanceNodeEndTime: '',//结算结束时间==========(2预采投放)
+      }
+    }
+    setPayload(data)
+  }
+
+  /*点击下一页上一页(参数是改变后的页码及每页条数)*/
+  let onNextChange = (page, pageSize) => {
+    let this_payload = JSON.parse(JSON.stringify(payload));
+    this_payload.pageNum = page
+    this_payload.pageSize = pageSize
+    setPayload(this_payload)
+
+  }
+  /*改变每页条数*/
+  let onSizeChange = (page, pageSize) => {
+    let this_payload = JSON.parse(JSON.stringify(payload));
+    this_payload.pageNum = page
+    this_payload.pageSize = pageSize
+    setPayload(this_payload)
+    onPageTotal()
+  }
+  /*显示总条数和页数*/
+  let onPageTotal = (total, range) => {
+    let totalPage = Math.ceil(total / payload.pageSize)
+    return `共${total}条记录 第 ${payload.pageNum} / ${totalPage}  页`
+  }
+
+  return (
+    <>
+      <div className={style.block__cont}>
+        <div className={style.block__header}>
+          {/* {
+            history.location.query.recordDetail == 'view' ? <div>查看已入账明细</div> : <div>处理账单</div>
+          } */}
+          <div>账单明细</div>
+          <div>
+            <Button className={style.btn_radius} htmlType="button" onClick={() => { history.goBack() }}>返回</Button>
+          </div>
+        </div>
+        <div className={style.form__cont}>
+          <h3>基本信息</h3>
+          <div className={style.form__cont}>
+            <Row justify="space-around" align="center">
+              <Col className={style.form__item} span={8}>
+                <div>业务类型：<span>{channelBalanceBillInfo.billTypeName}</span></div>
+              </Col>
+              <Col className={style.form__item} span={8}>
+                <div>账单月份：<span>{channelBalanceBillInfo.balancePeriod}</span></div>
+              </Col>
+              <Col className={style.form__item} span={8}>
+                <div>账单名称：<span>{channelBalanceBillInfo.billName}</span></div>
+              </Col>
+            </Row>
+            <Row justify="space-around" align="center">
+              <Col className={style.form__item} span={8}>
+                <div>账单编码：<span>{channelBalanceBillInfo.billNo}</span></div>
+              </Col>
+              <Col className={style.form__item} span={8}>
+                <div>账单状态：<span>{channelBalanceBillInfo.billStatusName}</span></div>
+              </Col>
+              <Col className={style.form__item} span={8}>
+                <div>账单说明：<span>{channelBalanceBillInfo.checkRemark ? channelBalanceBillInfo.checkRemark : '--'}</span></div>
+              </Col>
+            </Row>
+            <Row justify="space-around" align="center">
+              <Col className={style.form__item} span={8}>
+                <div>原结算金额(元)：<span style={{ color: '#f00' }}>{channelBalanceBillInfo.confirmedAmount}</span></div>
+                <div style={{ color: '#f00' }}></div>              </Col>
+              <Col className={style.form__item} span={8}>
+                <div>调整后结算金额(元)：<span style={{ color: '#f00' }}>{channelBalanceBillInfo.adjustConfirmedAmount}</span></div>
+              </Col>
+              <Col className={style.form__item} span={8}>
+                <div>调整金额(元)：<span style={{ color: '#f00' }}>
+                  {channelBalanceBillInfo.totalAdjustAmount}
+                </span></div>
+              </Col>
+            </Row>
+            <Row justify="space-around" align="center">
+              <Col className={style.form__item} span={8}>
+                <div>已结算笔数：<span>{channelBalanceBillInfo.confirmedCount}</span></div>
+              </Col>
+              <Col className={style.form__item} span={8}>
+                <div>备注：<span>{channelBalanceBillInfo.remark}</span></div>
+              </Col>
+              <Col className={style.form__item} span={8}>
+              </Col>
+            </Row>
+          </div>
+        </div>
+      </div>
+
+      {/* 开票信息111 */}
+      {/* {channelBalanceBillInvoiceApplyInfo ?
+        <div className={style.block__cont}>
+          <div className={style.form__cont}>
+            <h3>开票信息</h3>
+            <div className={style.form__cont}>
+              <Row justify="space-around" align="center">
+                <Col className={style.form__item} span={8}>
+                  <div>
+                    所属渠道：
+                    <span>{billTypeStr}</span>
+                  </div>
+                </Col>
+                <Col className={style.form__item} span={8}>
+                  <div>
+                    甲方信息：
+                    <span>{channelBalanceBillInvoiceApplyInfo.channelName}</span>
+                  </div>
+                </Col>
+                <Col className={style.form__item} span={8}>
+                  <div>
+                    开票公司名称：
+                    <span>{channelBalanceBillInvoiceApplyInfo.channelName}</span>
+                  </div>
+                </Col>
+              </Row>
+              <Row justify="space-around" align="center">
+                <Col className={style.form__item} span={8}>
+                  <div>
+                    纳税人识别号：
+                    <span>{channelBalanceBillInvoiceApplyInfo.taxNo}</span>
+                  </div>
+                </Col>
+                <Col className={style.form__item} span={8}>
+                  <div>
+                    开户银行：<span>{channelBalanceBillInvoiceApplyInfo.bankName}</span>
+                  </div>
+                </Col>
+                <Col className={style.form__item} span={8}>
+                  <div>
+                    账号：
+                    <span>{channelBalanceBillInvoiceApplyInfo.bankAccountNo}</span>
+                  </div>
+                </Col>
+              </Row>
+              <Row justify="space-around" align="center">
+                <Col className={style.form__item} span={8}>
+                  <div>
+                    发票地址：
+                    <span>{channelBalanceBillInvoiceApplyInfo.invoiceAddress}</span>
+                  </div>
+                </Col>
+                <Col className={style.form__item} span={8}>
+                  <div>
+                    联系电话：
+                    <span>{channelBalanceBillInvoiceApplyInfo.phoneNo}</span>
+                  </div>
+                </Col>
+                <Col className={style.form__item} span={8}>
+                  <div>
+                    开票金额：
+                    <span><span style={{ color: '#f00' }}>{channelBalanceBillInvoiceApplyInfo.totalInvoiceAmount}</span>元</span>
+                  </div>
+                </Col>
+              </Row>
+              <Row justify="space-around" align="center">
+                <Col className={style.form__item} span={8}>
+                  <div>
+                    发票类型：
+                    <span>{channelBalanceBillInvoiceApplyInfo.invoiceType}</span>
+                  </div>
+                </Col>
+                <Col className={style.form__item} span={8}>
+                  <div>
+                    开票账期：
+                    <span>{channelBalanceBillInvoiceApplyInfo.lastInvoiceTime}</span>
+                  </div>
+                </Col>
+                <Col className={style.form__item} span={8}>
+                  <div>
+                    发票内容：
+                    <span>{channelBalanceBillInvoiceApplyInfo.invoiceContent}</span>
+                  </div>
+                </Col>
+              </Row>
+              <Row justify="space-around" align="center">
+                <Col className={style.form__item} span={8}>
+                  <div>
+                    开票银行：
+                    <span>{channelBalanceBillInvoiceApplyInfo.billingBank}</span>
+                  </div>
+                </Col>
+                <Col className={style.form__item} span={8}>
+                  <div>
+                    备注：
+                    <span>{channelBalanceBillInvoiceApplyInfo.remark}</span>
+                  </div>
+                </Col>
+                <Col className={style.form__item} span={8}>
+                </Col>
+              </Row>
+            </div>
+          </div>
+        </div> : ''
+      } */}
+      <div className={style.block__cont}>
+        <Form className={style.form__cont} form={form} onFinish={searchRChargeBtn}>
+          <h3 style={{ marginBottom: '50px' }}>订单查询</h3>
+          <Row justify="space-around" align="center">
+            <Form.Item label="卡券/卡包编号：" name="cardId" className={style.form__item} labelCol={{ span: 8 }}>
+              <Input placeholder="请输入"></Input>
+            </Form.Item>
+            <Form.Item label="卡券/卡包标题：" name="couponSkuName" className={style.form__item} labelCol={{ span: 8 }}>
+              <Input placeholder="请输入" ></Input>
+            </Form.Item>
+            <Form.Item label="卡券形式：" name="cardTypeList" className={style.form__item} labelCol={{ span: 8 }}>
+              <Select placeholder="不限" allowClear>
+                {
+                  cardTypeList.map((v) => <Option key={v.value} value={v.value}>{v.name}</Option>)
+                }
+              </Select>
+            </Form.Item>
+          </Row>
+          <Row justify="space-around" align="center">
+            <Form.Item label="卡券品类：" name="cardCategoryList" className={style.form__item} labelCol={{ span: 8 }}>
+
+              <Select placeholder="不限" allowClear>
+                {
+                  cardCategoryList.map((v) => <Option key={v.value} value={v.value}>{v.name}</Option>)
+                }
+              </Select>
+            </Form.Item>
+            {/* <Form.Item label="结算节点：" name="balanceNode" className={style.form__item} labelCol={{ span: 8 }}>
+              <Select placeholder="不限" allowClear>
+                {
+                  balanceNode.map((v) => <Option key={v.id} value={v.id}>{v.title}</Option>)
+                }
+              </Select>
+            </Form.Item> */}
+            <Form.Item label="结算日期：" name="balanceNodeTime" className={style.form__item} labelCol={{ span: 8 }}>
+              <RangePicker locale={locale} placeholder={['开始时间', '结束时间']} />
+            </Form.Item>
+            <Form.Item label="" name="balanceNode" className={style.form__item} labelCol={{ span: 8 }}>
+
+            </Form.Item>
+          </Row>
+          <Row justify="space-around" align="center">
+            <Space size={22}>
+              <Button htmlType="submit" type="primary">查询</Button>
+              <Button htmlType="button" onClick={resetBtnEvent}>重置</Button>
+            </Space>
+          </Row>
+        </Form>
+      </div>
+      <div className={style.block__cont__t}>
+        <div className={style.listTitle}>
+          <span style={{ padding: '30px 20px' }}>卡券明细</span>
+          <div className={style.btns}>
+            <Button style={{ margin: '10px' }} htmlType="button" type="primary" onClick={exportDimension}>导出（项目维度）</Button>
+            {/* <Button style={{ margin: '10px' }} htmlType="button" type="primary">导出对账专用</Button> */}
+            <Button style={{ margin: '10px' }} htmlType="button" type="primary" onClick={exportUnChargeed}>导出当前明细</Button>
+            {/* {
+              (channelBalanceBillInfo.billStatus == 2 || channelBalanceBillInfo.billStatus == 6 || channelBalanceBillInfo.billStatus == 8)
+                ?
+                <Button style={{ margin: '10px' }} htmlType="button" type="primary" onClick={adjustmentBatch}>调整金额（批量）</Button>
+                : ''
+            }
+            {
+              (channelBalanceBillInfo.billStatus == 2 || channelBalanceBillInfo.billStatus == 6 || channelBalanceBillInfo.billStatus == 8)
+                ?
+                <Button style={{ margin: '10px' }} htmlType="button" type="primary" onClick={revokeBatch}>撤销入账（批量）</Button>
+                : ''
+            } */}
+          </div>
+        </div>
+        <Table columns={launchColumns} dataSource={infoDetailList} pagination={false}></Table>
+        <Pagination
+          className={style.pagination}
+          current={payload.pageNum} //选中第一页
+          pageSize={payload.pageSize} //默认每页展示10条数据
+          total={total} //总数
+          onChange={onNextChange} //切换 页码时触发事件
+          pageSizeOptions={['10', '20', '30', '60']}
+          onShowSizeChange={onSizeChange}
+          showTotal={onPageTotal}
+        />
+
+        <p style={{ margin: '60px 20px 20px' }}>项目统计</p>
+        <Table dataSource={proStatisticsList} pagination={false}>
+          <Column title="项目" dataIndex="marketProjectName" key="marketProjectName" />
+          <Column title="原结算金额(元)" dataIndex="balanceAmountTotal" key="balanceAmountTotal"
+            align="right"
+            render={(text, all) => {
+              return <span style={{ color: '#f00' }}>{text}</span>
+            }}
+          />
+          <Column title="调整后结算金额(元)" dataIndex="adjustAmountTotal" key="adjustAmountTotal"
+            align="right"
+            render={(text, all) => {
+              return <span style={{ color: '#f00' }}>{text}</span>
+            }}
+          />
+        </Table>
+
+        {/* 底部 */}
+        {/*账单状态（1待生成；2待下z发；3调整中；4终审确认5:待初审;6:初审驳回7:待终审;8:终审驳回） */}
+        {/* <div style={{ marginTop: '100px', textAlign: 'center' }}>
+          // disabled={isLastConfirm}
+          {
+            channelBalanceBillInfo.billStatus == 7
+              ? <Button style={{ margin: '10px' }} htmlType="button" type="primary" onClick={confirmInstance}>终审确认</Button>
+              : ''
+          }
+            // disabled={isLastReject}
+          {
+            channelBalanceBillInfo.billStatus == 7
+              ? <Button style={{ margin: '10px' }} htmlType="button" type="primary" onClick={rejectInstance}>终审驳回</Button>
+              : ''
+          }
+        </div> */}
+      </div>
+      {/* 3审核确认弹框 */}
+      <Modal title="审核确认声明" visible={isModalConfirm} onOk={handleConfirmOk} onCancel={handleConfirmCancel}>
+        <p>
+          点击终审确认按钮，视为贵司和我司已确认对应服务的服务内容，
+          服务条款，服务效期，结算基准、结算数量、结算单价、服务费用、以及结算总价金额。
+          并且同意系统据此生成账单，我司根据账单开据发票，
+          贵司确认结算账单总金额根据销售合同的付款信息，向我司支付全部款项。
+          已确认开票的金额，不得退票，退款。
+        </p>
+      </Modal>
+      {/* 4驳回理由弹框 */}
+      <Modal title="驳回理由" visible={isModalReject} onOk={handleRejectOk} onCancel={handleRejectCancel}>
+        <Form name="explain">
+          <Form.Item
+            label="驳回理由："
+            name="reject"
+            rules={[
+              {
+                required: true,
+                message: '请填写驳回理由',
+              }
+            ]}
+          >
+            <TextArea onChange={rejectText} rows={4} />
+          </Form.Item>
+        </Form>
+      </Modal>
+
+    </>
+  )
+};
+export default connect(({ financeManageModel }) => ({
+  unrecordedDetailList: financeManageModel.unrecordedDetailList,
+  total: financeManageModel.total,
+  cardCategoryList: financeManageModel.cardCategoryList,
+  cardTypeList: financeManageModel.cardTypeList,
+  isLastConfirm: financeManageModel.isLastConfirm,
+  isLastReject: financeManageModel.isLastReject,
+
+  channelBalanceBillInfo: financeManageModel.channelBalanceBillInfo,
+  channelBalanceBillInvoiceApplyInfo: financeManageModel.channelBalanceBillInvoiceApplyInfo,
+  infoDetailList: financeManageModel.infoDetailList,
+  proStatisticsList: financeManageModel.proStatisticsList
+}))(DetailChargeed)
